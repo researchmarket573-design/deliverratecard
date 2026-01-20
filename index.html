@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Fare Cards</title>
+
+<!-- Poppins Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.wrapper {
+  width: 95%;
+  max-width: 420px;
+  display: grid;
+  gap: 18px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.fare-display {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.fare-display h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.fare-display p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.note {
+  background: #f0fff9;
+  color: #067a5f;
+  font-size: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 12px 0 18px;
+}
+
+/* Slider */
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 6px;
+  background: #dcdcdc;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #00b386;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Dedicated card styling */
+.list {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.badge {
+  display: inline-block;
+  background: #ffecec;
+  color: #b60000;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- Floating Delivery Card -->
+  <div class="card">
+    <div class="card-title">Floating Delivery</div>
+
+    <div class="fare-display">
+      <h2 id="floatingFare">₹28</h2>
+      <p id="floatingDesc">Base Fare (Applicable up to 2 km)</p>
+    </div>
+
+    <div class="note" id="floatingNote">
+      Base fare is applicable only when the delivery drop distance is within 2 km
+    </div>
+
+    <input 
+      type="range" 
+      min="1" 
+      max="2" 
+      step="1" 
+      value="1"
+      id="floatingSlider"
+    >
+
+    <div class="labels">
+      <span>≤ 2 km</span>
+      <span>> 2 km</span>
+    </div>
+  </div>
+
+  <!-- Dedicated Delivery Card -->
+  <div class="card">
+    <div class="card-title">Dedicated Delivery</div>
+
+    <span class="badge">No Base Fare Applicable</span>
+
+    <div class="fare-display">
+      <h2>₹13 / km</h2>
+      <p>Total Distance Charge</p>
+    </div>
+
+    <div class="list">
+      • Forward Distance: <strong>₹10 / km</strong><br>
+      • Return Distance: <strong>₹3 / km</strong><br>
+      • Per Trip Bonus: <strong>₹30</strong>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const slider = document.getElementById("floatingSlider");
+const fare = document.getElementById("floatingFare");
+const desc = document.getElementById("floatingDesc");
+const note = document.getElementById("floatingNote");
+
+slider.addEventListener("input", () => {
+  if (slider.value === "1") {
+    fare.innerText = "₹28";
+    desc.innerText = "Base Fare (Applicable up to 2 km)";
+    note.style.display = "block";
+  } else {
+    fare.innerText = "₹10 / km";
+    desc.innerText = "Extra Distance Charge (No Base Fare)";
+    note.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>
